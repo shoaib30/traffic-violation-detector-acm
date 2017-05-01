@@ -29,10 +29,13 @@ def sendMessageToCCM():
 
 def monitorSensor(arduinoSerial):
     while True:
-        x = int(arduinoSerial.readline())
-        print "Detected Violation"
-        if(x == 1):
-            sendMessageToCCM()
+	try:
+        	x = int(arduinoSerial.readline())
+        	print "Detected Violation"
+		if(x == 1):
+		    sendMessageToCCM()
+	except Exception as e:
+		print e
 connection = 0
 arduinoSerial = initializeModule()
 monitorSensor(arduinoSerial)
